@@ -316,7 +316,7 @@ body{
         event.preventDefault(); // prevent the default form submission behavior
 
         const formData = new FormData(form);
-        const response = await fetch('http://localhost:8002/recUpdateProfile', {
+        const response = await fetch('https://jobportalweb.onrender.com/recUpdateProfile', {
             method: 'POST',
             body: formData
         });
