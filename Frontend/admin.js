@@ -2,7 +2,7 @@
 
 $(document).ready(function(){
     $.ajax({
-        url: "http://localhost:8002/" + "admin",
+        url: "https://jobportalweb.onrender.com/" + "admin",
         type: "GET",
         success: function (req, res, data) {
             data = JSON.parse(data.responseText)
@@ -65,7 +65,7 @@ if(window.location.href.indexOf('adminprofile')>=0){
     console.log(sessionStorage.getItem('currUser'));
     $(document).ready(function(){
         $.ajax({
-            url:"http://localhost:8002/"+"AdmingetEmp",
+            url:"https://jobportalweb.onrender.com/"+"AdmingetEmp",
             type:'GET',
             beforeSend: function(request) {
                 request.setRequestHeader("_id",sessionStorage.getItem('currUser'))
@@ -88,7 +88,7 @@ if(window.location.href.indexOf('adminprofile')>=0){
                 profile_obj[8].innerText = user.phone1;
                 profile_obj[9].innerText = user.phone2;
                 profile_obj[10].innerText = user.address;
-                document.querySelector('#profile-pic').src='http://localhost:8002/'+user.profile
+                document.querySelector('#profile-pic').src='https://jobportalweb.onrender.com/'+user.profile
             },
             error: function (error) {
                 console.log(error);
@@ -102,7 +102,7 @@ if(window.location.href.indexOf('adminprofile')>=0){
     console.log(sessionStorage.getItem('currUser'));
     $(document).ready(function(){
         $.ajax({
-            url:"http://localhost:8002/"+"AdmingetCan",
+            url:"https://jobportalweb.onrender.com/"+"AdmingetCan",
             type:'GET',
             beforeSend: function(request) {
                 request.setRequestHeader("_id",sessionStorage.getItem('currUser'))
@@ -124,7 +124,7 @@ if(window.location.href.indexOf('adminprofile')>=0){
   profile_obj[8].innerText = user.phone1;
   profile_obj[9].innerText = user.phone2;
   profile_obj[10].innerText = user.address;
-  document.querySelector('#profile-pic').src='http://localhost:8002/'+user.profile
+  document.querySelector('#profile-pic').src='https://jobportalweb.onrender.com/'+user.profile
  // var user = JSON.parse(sessionStorage.getItem("user"));
  for(let i in user.skillset){
   console.log(user.skillset[i])
@@ -150,7 +150,7 @@ if((window.location.href).indexOf("edittest.html")>=0){
   $(document).ready(function(){
       $.ajax({
           type:"GET",
-          url:"http://localhost:8002/edittest",
+          url:"https://jobportalweb.onrender.com/edittest",
           success:function(data){
               console.log(data)
               for(test of data){
@@ -193,7 +193,7 @@ if((window.location.href).indexOf("edittestpage.html")>=0){
   $(document).ready(function(){
       $.ajax({
           type:"GET",
-          url:"http://localhost:8002/edittestpage",
+          url:"https://jobportalweb.onrender.com/edittestpage",
           headers:{
               testname:sessionStorage.getItem("testname")
           },
@@ -243,7 +243,7 @@ function delquestion(event){
   $.ajax({
     type: "POST",
 
-    url: "http://localhost:8002/delquestion",
+    url: "https://jobportalweb.onrender.com/delquestion",
 
     contentType: "application/json",
 
@@ -262,7 +262,7 @@ function addquestion() {
   $.ajax({
     type: "POST",
 
-    url: "http://localhost:8002/test/" + sessionStorage.getItem("testname"),
+    url: "https://jobportalweb.onrender.com/test/" + sessionStorage.getItem("testname"),
 
     contentType: "application/json",
 
@@ -288,7 +288,7 @@ function addtest() {
   $.ajax({
     type: "POST",
 
-    url: "http://localhost:8002/test/" + $("#testname").val(),
+    url: "https://jobportalweb.onrender.com/test/" + $("#testname").val(),
 
     contentType: "application/json",
 

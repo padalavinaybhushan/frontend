@@ -21,7 +21,7 @@ function login(){
     //console.log(x);
     
     $.ajax({
-        url:"http://localhost:8002/"+curr_url,
+        url:"https://jobportalweb.onrender.com/"+curr_url,
         type:'POST',
         contentType: "application/json",
         data : JSON.stringify({
@@ -63,7 +63,7 @@ function login(){
 function google(){
     console.log("lppppp");
     $.ajax({
-        url:"http://localhost:8002/tempoo",
+        url:"https://jobportalweb.onrender.com/tempoo",
         beforeSend: function (request) {
             request.setRequestHeader("Access-Control-Allow-Origin", '*');
           },

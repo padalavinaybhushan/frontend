@@ -22,7 +22,7 @@ $("window").ready(async () => {
   }
 console.log(accessToken);
   $.ajax({
-    url: "http://localhost:8002/" + curr_url,
+    url: "https://jobportalweb.onrender.com/" + curr_url,
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -56,7 +56,7 @@ curr_url = curr_url[curr_url.length - 1];
 if (curr_url == "canprofile.html") {
   console.log(JSON.parse(sessionStorage.getItem('user')));
   $.ajax({
-    url: "http://localhost:8002/" + curr_url,
+    url: "https://jobportalweb.onrender.com/" + curr_url,
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -99,7 +99,7 @@ var score ={}
 function submittest(){
   console.log(score);
   $.ajax({
-    url: "http://localhost:8002/" + "scoreUpdate",
+    url: "https://jobportalweb.onrender.com/" + "scoreUpdate",
     type: "POST",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -127,7 +127,7 @@ if(window.location.href.indexOf("test.html")>=0){
   $(document).ready(function(){
       $.ajax({
           type:"GET",
-          url:"http://localhost:8002/"+"test",
+          url:"https://jobportalweb.onrender.com/"+"test",
           beforeSend: function (request) {
             request.setRequestHeader("authorization", "Bearer " + accessToken);
             request.setRequestHeader("name",sessionStorage.getItem('currTest'));
@@ -177,7 +177,7 @@ if(window.location.href.indexOf("test.html")>=0){
 if(window.location.href.indexOf('testpage.html')>=0){
   $("window").ready(async () => {
     $.ajax({
-      url: "http://localhost:8002/" + "testpagerender",
+      url: "https://jobportalweb.onrender.com/" + "testpagerender",
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);

@@ -25,7 +25,7 @@ $('window').ready(async ()=>{
     }
         console.log(accessToken);
     $.ajax({
-        url:"http://localhost:8002/"+curr_url,
+        url:"https://jobportalweb.onrender.com/"+curr_url,
         type:'GET',
         beforeSend: function(request) {
             request.setRequestHeader("authorization", "Bearer "+accessToken);
@@ -65,7 +65,7 @@ if(curr_url == "empprofile.html"){
 
     var user = JSON.parse(sessionStorage.getItem('user'))
     $.ajax({
-        url:"http://localhost:8002/"+"getEmp",
+        url:"https://jobportalweb.onrender.com/"+"getEmp",
         type:'GET',
         beforeSend: function(request) {
             request.setRequestHeader("authorization", "Bearer "+accessToken);

@@ -12,7 +12,7 @@ function generateResume() {
     var x = document.cookie 
   accessToken = x.split('=')[1]
     $.ajax({
-        url:"http://localhost:8002/"+"resumeurl",
+        url:"https://jobportalweb.onrender.com/"+"resumeurl",
         type:'POST',
         contentType: "application/json",
         data : JSON.stringify({

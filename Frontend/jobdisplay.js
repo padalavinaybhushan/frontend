@@ -17,7 +17,7 @@ var user = JSON.parse(sessionStorage.getItem("user"));
 if (window.location.href.indexOf("browse-job.html") >= 0) {
   $(document).ready(function () {
     $.ajax({
-      url: "http://localhost:8002/" + curr_url,
+      url: "https://jobportalweb.onrender.com/" + curr_url,
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -91,7 +91,7 @@ if (window.location.href.indexOf("browse-job.html") >= 0) {
 if (window.location.href.indexOf("empprofile.html") >= 0) {
   $(document).ready(function () {
     $.ajax({
-      url: "http://localhost:8002/" + curr_url,
+      url: "https://jobportalweb.onrender.com/" + curr_url,
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -170,7 +170,7 @@ if (window.location.href.indexOf("empprofile.html") >= 0) {
 function BrowseCandidate(event) {
   console.log(event);
   $.ajax({
-    url: "http://localhost:8002/" + "job-data-applied",
+    url: "https://jobportalweb.onrender.com/" + "job-data-applied",
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -194,7 +194,7 @@ if (window.location.href.indexOf("browse-candidates.html") >= 0) {
   $(document).ready(function () {
     //
     $.ajax({
-      url: "http://localhost:8002/" + "job-dataId",
+      url: "https://jobportalweb.onrender.com/" + "job-dataId",
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -306,7 +306,7 @@ if (window.location.href.indexOf("browse-candidates.html") >= 0) {
 
 function fun(obj){
   $.ajax({
-    url: "http://localhost:8002/" + "candDetail",
+    url: "https://jobportalweb.onrender.com/" + "candDetail",
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -331,7 +331,7 @@ if(window.location.href.indexOf('applicant')>=0){
     //document.querySelector('#profile').innerText = user.name 
     $(document).ready(function () {
     $.ajax({
-      url: "http://localhost:8002/" + "resumeDB",
+      url: "https://jobportalweb.onrender.com/" + "resumeDB",
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("canid", user._id);
@@ -416,7 +416,7 @@ function updateJobStatus(event){
   var user = JSON.parse(sessionStorage.getItem('currApplicant'))
   var job_id = sessionStorage.getItem('currJobId')
   $.ajax({
-    url: "http://localhost:8002/" + "updateJobStatus",
+    url: "https://jobportalweb.onrender.com/" + "updateJobStatus",
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -436,7 +436,7 @@ function updateJobStatus(event){
 }
 function CandidateAccept(cand_obj, job_id) {
   $.ajax({
-    url: "http://localhost:8002/" + "jobOffered",
+    url: "https://jobportalweb.onrender.com/" + "jobOffered",
     type: "POST",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -460,7 +460,7 @@ function CandidateAccept(cand_obj, job_id) {
 function CandidateReject(cand_obj, job_id) {
   console.log("hi");
   $.ajax({
-    url: "http://localhost:8002/" + "jobRejected",
+    url: "https://jobportalweb.onrender.com/" + "jobRejected",
     type: "POST",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -483,7 +483,7 @@ function CandidateReject(cand_obj, job_id) {
 function JobApply(event) {
   console.log(event);
   $.ajax({
-    url: "http://localhost:8002/" + "job-data",
+    url: "https://jobportalweb.onrender.com/" + "job-data",
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -507,7 +507,7 @@ function JobWithDraw(event) {
   //job-del
   console.log(event);
   $.ajax({
-    url: "http://localhost:8002/" + "job-del",
+    url: "https://jobportalweb.onrender.com/" + "job-del",
     type: "POST",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -557,7 +557,7 @@ if (window.location.href.indexOf("job-detail") >= 0) {
   )
   function applyJob() {
     $.ajax({
-      url: "http://localhost:8002/" + "job-detail.html",
+      url: "https://jobportalweb.onrender.com/" + "job-detail.html",
       type: "POST",
       beforeSend: function (request) {
         request.setRequestHeader("Authorization", "Bearer " + accessToken);
@@ -590,7 +590,7 @@ if(window.location.href.indexOf("detailjob.html")>=0){
   console.log(JSON.parse(sessionStorage.getItem('user'))._id);
   $(document).ready(function () {
     $.ajax({
-      url: "http://localhost:8002/" + "job-detail.html",
+      url: "https://jobportalweb.onrender.com/" + "job-detail.html",
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -664,7 +664,7 @@ if(window.location.href.indexOf("detailjob.html")>=0){
 if (window.location.href.indexOf("jobsapplied.html") >= 0) {
   $(document).ready(function () {
     $.ajax({
-      url: "http://localhost:8002/" + curr_url,
+      url: "https://jobportalweb.onrender.com/" + curr_url,
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
