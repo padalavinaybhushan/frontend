@@ -536,6 +536,7 @@ if (window.location.href.indexOf("job-detail") >= 0) {
     var job_id = sessionStorage.getItem('currJobId')
     document.querySelector('#jobId').value = job._id
     document.querySelector('#canId').value = user._id 
+    console.log(user,user._id,"pop");
   })
   console.log(job);
   var render_obj = $(".render");
@@ -550,12 +551,12 @@ if (window.location.href.indexOf("job-detail") >= 0) {
   job.skills.forEach((ele) => {
     render_obj[7].innerHTML += ele + " ";
   });
-  $(document).ready(function(){
-    var user = JSON.parse(sessionStorage.getItem('user'))
-        document.querySelector('#canId').value=user._id,
-    document.querySelector('#jobId').value = job._id
-  }
-  )
+  // $(document).ready(function(){
+  //   var user = JSON.parse(sessionStorage.getItem('user'))
+  //       document.querySelector('#canId').value=user._id,
+  //   document.querySelector('#jobId').value = job._id
+  // }
+  // )
   function applyJob() {
     $.ajax({
       url: "https://jobportalweb.onrender.com/" + "job-detail.html",
