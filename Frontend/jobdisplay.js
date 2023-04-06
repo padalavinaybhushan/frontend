@@ -532,7 +532,7 @@ function JobWithDraw(event) {
 if (window.location.href.indexOf("job-detail") >= 0) {
   var job = JSON.parse(sessionStorage.getItem("currentJob"));
   $(document).ready(function(){
-    var user = JSON.parse(sessionStorage.getItem('currApplicant'))
+    var user = JSON.parse(sessionStorage.getItem('user'))
     var job_id = sessionStorage.getItem('currJobId')
     document.querySelector('#jobId').value = job._id
     document.querySelector('#canId').value = user._id 
@@ -551,8 +551,9 @@ if (window.location.href.indexOf("job-detail") >= 0) {
     render_obj[7].innerHTML += ele + " ";
   });
   $(document).ready(function(){
-        document.querySelector('canId').value=user._id,
-    document.querySelector('jobId').value = job._id
+    var user = JSON.parse(sessionStorage.getItem('user'))
+        document.querySelector('#canId').value=user._id,
+    document.querySelector('#jobId').value = job._id
   }
   )
   function applyJob() {
