@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
+    <script>
+
+            var url = window.location.href.split('=')[1]
+            $.ajax({
+            url: "http://localhost:8002/recuiter/"+url,
+            type: "GET",
+
+            success: function (req, res, data) {
+            var received = JSON.parse(data.responseText)
+            if(received["noUser"]){
+                alert("no user found")
+                //window.location.href="http://127.0.0.1:5501/Frontend/error-404.html"
+            }
+            else{
+                
+                console.log(received);
+                sessionStorage.setItem('accessToken',received["accessToken"]);
+                console.log(received['user']);
+                console.log(received['accessToken']);
+                document.cookie="accessToken="+received["accessToken"]
+                document.cookie="userId="+received["user"]._id 
+                sessionStorage.setItem('user',JSON.stringify(received["user"]));
+                console.log(sessionStorage.getItem('user'));
+                console.log(document.cookie);
+                window.location.href = "postjob.html"
+
+            }
+            },
+            error: function (error) {
+            console.log(error);
+            // window.location.href = "error-404.html";
+            },
+        });
+
+    </script>
+</body>
+</html>

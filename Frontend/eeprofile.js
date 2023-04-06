@@ -1,0 +1,31 @@
+if((window.location.href).indexOf("eeprofile")>=0){
+    $(document).ready(function(){
+        $.ajax({
+            type:"GET",
+            url:"http://localhost:5000/eeprofile",
+            headers:{
+                "token":sessionStorage.getItem("accessToken"),
+                email:sessionStorage.getItem("email")
+            },
+            error:function(err,data){
+                if(err.status=="404")window.location.href="post-job.html"
+                if(err.status=="401")window.location.href="browse-job.html"
+                if(err.status=="405")window.location.href="mainhome.html"
+            },
+            success:function(data){
+                $("#username").html(data.name)
+                $("#username1").val(data.fullname)
+                $("#email").val(data.email)
+                $("#phone1").val(data.phone1)
+                $("#phone2").val(data.phone2)
+                $("#github").val(data.github)
+                $("#linkedin").val(data.Linkedin)
+                $("#company").val(data.company)                
+                $("#designation").val(data.designation)
+                $("#address").val(data.address)
+                $("#address1").html(`<b>Address: </b>`+data.address)
+                console.log(data)
+            }
+        })
+    })
+}
