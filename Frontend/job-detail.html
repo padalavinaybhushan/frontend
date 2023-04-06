@@ -162,11 +162,11 @@
 								<h5 class="font-weight-600">Job Requirements</h5>
 								<div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
 								<p class="render"></p>
-								<form action="http://localhost:8002/resumeDB" method="POST" enctype="multipart/form-data" id="kko">
+								<form action="https://jobportalweb.onrender.com/resumeDB" method="POST" enctype="multipart/form-data" id="kko">
 									<input id="picture" type="file" class="site-button" name="resume" >
 									<input type="text" name="canId"   style="display: none;"  id="canId" >
 									<input type="text" name="jobId"   style="display: none;"  id="jobId" >
-									<button type="submit">submit photo</button>
+									<button type="submit">submit resume</button>
 								</form>
 								<button class="btn btn-primary" type="button" onclick="applyJob()">Apply This Job</button>
 							</div>
@@ -194,7 +194,7 @@
         event.preventDefault(); // prevent the default form submission behavior
 
         const formData = new FormData(form);
-        const response = await fetch('http://localhost:8002/cUpdateProfile', {
+        const response = await fetch('https://jobportalweb.onrender.com/resumeDB', {
             method: 'POST',
             body: formData
         });
