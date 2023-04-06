@@ -40,7 +40,7 @@ function login(){
             }
             else{
                 
-                //console.log(received);
+                console.log(received);
                 sessionStorage.setItem('accessToken',received["accessToken"]);
                 console.log(received['user']);
                 console.log(received['accessToken']);
@@ -55,6 +55,9 @@ function login(){
                 window.location.href = "postjob.html" 
             }
             
+        },
+        error:function(err){
+            console.log(err);
         }
     })
 }
