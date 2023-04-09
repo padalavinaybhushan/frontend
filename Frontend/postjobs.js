@@ -33,7 +33,7 @@ function postJob(){
             skills:$('#skill').val(),
             salary:$('#salary').val(),
             jobreq:$('#jobreq').val(),
-            category:$('category').val(),
+            category:$('#category').val(),
             createrId:JSON.parse(sessionStorage.getItem('user'))["_id"]
         }),
         success:function(req,res,data){
