@@ -349,18 +349,18 @@ function addquestion() {
 }
 
 function addtest() {
-  console.log("hi");
+  console.log("hi jkl");
 
   $.ajax({
     type: "POST",
 
-    url: "https://jobportal-s38r.onrender.com/test/" + $("#testname").val(),
+    url: "http://localhost:8002/testname" ,
 
     contentType: "application/json",
 
     data: JSON.stringify({
       question: $("#question").val(),
-
+      name:$("#testname").val(),
       options: [$("#a").val(), $("#b").val(), $("#c").val(), $("#d").val()],
 
       ans: $("#ans").val(),

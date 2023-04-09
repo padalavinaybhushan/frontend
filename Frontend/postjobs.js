@@ -27,7 +27,7 @@ function postJob(){
           contentType: "application/json",
           data : JSON.stringify({
             name:$('#name').val(),
-            jodDescription:$('#jd').val(),
+            jobDescription:$('#jd').val(),
             location:$('#loc').val(),
             Experience:$('#exp').val(),
             skills:$('#skill').val(),
