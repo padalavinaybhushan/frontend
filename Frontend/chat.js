@@ -1,4 +1,4 @@
-const socket=io("ws://localhost:8900")
+const socket=io("ws://localhost:8002")
 socket.on("getmessage",data=>{
     message=data[0]
     oppositeid=data[1]
@@ -17,7 +17,7 @@ socket.on("getmessage",data=>{
 if(window.location.href.indexOf("cchat.html")>=0){
     $(document).ready(function(){
         $.ajax({
-            url:"https://jobportalweb.onrender.com/conversations",
+            url:"http://localhost:8002/conversations",
             type:"GET",
             headers:{
                 id:JSON.parse(sessionStorage.getItem("user"))._id,
@@ -26,10 +26,11 @@ if(window.location.href.indexOf("cchat.html")>=0){
             success:(users)=>{
                 var flag=0
                 ds=""
+                
                 for(user of users){
                     document.getElementById("members").innerHTML+=`<a onclick="clearss()" id="`+user._id+`">
                                                                         <li class="clearfix" id="`+user._id+`">
-                                                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar" id="`+user._id+`">
+                                                                            <img src="${user.profile}" alt="avatar" id="`+user._id+`">
                                                                             <i class="fa fa-circle offline float-right" id=`+user._id+`status></i> 
                                                                             <div class="about" id="`+user._id+`">
                                                                                 <div class="name" id="`+user._id+`">`+user.name+`</div>
@@ -91,7 +92,7 @@ function godown(){
 
 function clearss(ev){
     $.ajax({
-        url:"https://jobportalweb.onrender.com/messages",
+        url:"http://localhost:8002/messages",
         type:"GET",
         headers:{
             members:[event.target.id,JSON.parse(sessionStorage.getItem("user"))._id],
@@ -102,8 +103,11 @@ function clearss(ev){
 
             messages=data[0]
             opposite=data[1]
+            console.log(opposite);
+            //document.querySelector('#curruser').src=opposite.profile 
             sessionStorage.setItem("coversationid",data[2])
             $("#username").html(opposite.name)
+            console.log(messages,"plopp");
             sessionStorage.setItem("oppositeid",opposite._id)
             str=""
             for(message of messages){
@@ -115,7 +119,7 @@ function clearss(ev){
                     str+=`<li class="clearfix">
                 <div class="message-data text-right">
                     <span class="message-data-time">`+time+`</span>
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                    <img src="${JSON.parse(sessionStorage.getItem("user")).profile}" alt="avatar">
                 </div>
                 <div class="message other-message float-right">`+message.message+`</div>
             </li>`
@@ -124,7 +128,7 @@ function clearss(ev){
                     str+=`<li class="clearfix">
                 <div class="message-data">
                     <span class="message-data-time">`+time+`</span>
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                    <img src="${opposite.profile}" alt="">
                 </div>
                 <div class="message my-message">`+message.message+`</div>
             </li>`
@@ -136,8 +140,9 @@ function clearss(ev){
 }
 if(window.location.href.indexOf("echat.html")>=0){
     $(document).ready(function(){
+        console.log("fghjkl");
         $.ajax({
-            url:"https://jobportalweb.onrender.com/conversations",
+            url:"http://localhost:8002/conversations",
             type:"GET",
             headers:{
                 id:JSON.parse(sessionStorage.getItem("user"))._id,
@@ -146,6 +151,7 @@ if(window.location.href.indexOf("echat.html")>=0){
             success:(users)=>{
                 var flag=0
                 ds=""
+                console.log(users);
                 for(user of users){
                     console.log(user)
                     document.getElementById("members").innerHTML+=`<a onclick="clearss()" id="`+user._id+`">
@@ -213,7 +219,7 @@ if(window.location.href.indexOf("echat.html")>=0){
 function conversationstart(){
     $.ajax({
         type:"POST",
-        url:"https://jobportalweb.onrender.com/conversations",
+        url:"http://localhost:8002/conversations",
         contentType:"application/json",
         data:JSON.stringify({
             ids:[JSON.parse(sessionStorage.getItem("user"))._id,JSON.parse(sessionStorage.getItem("currApplicant"))._id]
@@ -231,7 +237,7 @@ function sendmessage(ev){
     console.log(message)
     $.ajax({
         type:"POST",
-        url:"https://jobportalweb.onrender.com/messages",
+        url:"http://localhost:8002/messages",
         contentType:"application/json",
         data:JSON.stringify({
             conversationid:sessionStorage.getItem("coversationid"),

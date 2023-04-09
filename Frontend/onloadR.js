@@ -25,7 +25,7 @@ $('window').ready(async ()=>{
     }
         console.log(accessToken);
     $.ajax({
-        url:"https://jobportalweb.onrender.com/"+curr_url,
+        url:"http://localhost:8002/"+curr_url,
         type:'GET',
         beforeSend: function(request) {
             request.setRequestHeader("authorization", "Bearer "+accessToken);
@@ -48,10 +48,11 @@ $('window').ready(async ()=>{
             console.log("plop");
             console.log(data.responseText,1);
             console.log(sessionStorage.getItem('user'));
+            console.log(accessToken)
         },
         error: function (error) {
             console.log(error);
-           window.location.href="error-404.html"
+          // window.location.href="error-404.html"
         }
     })
 })
@@ -65,7 +66,7 @@ if(curr_url == "empprofile.html"){
 
     var user = JSON.parse(sessionStorage.getItem('user'))
     $.ajax({
-        url:"https://jobportalweb.onrender.com/"+"getEmp",
+        url:"http://localhost:8002/"+"getEmp",
         type:'GET',
         beforeSend: function(request) {
             request.setRequestHeader("authorization", "Bearer "+accessToken);
@@ -87,9 +88,9 @@ if(curr_url == "empprofile.html"){
             profile_obj[6].innerText = user.name;
             profile_obj[7].innerText = user.email;
             profile_obj[8].innerText = user.phone1;
-            profile_obj[9].innerText = user.phone2;
+            profile_obj[9].innerText = user.phone2;browse
             profile_obj[10].innerText = user.address;
-            document.querySelector('#profile-pic').src=user.profile
+            document.querySelector('#profile-pic').src='http://localhost:8002/'+user.profile
         },
         error: function (error) {
             console.log(error);

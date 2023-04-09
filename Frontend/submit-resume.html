@@ -39,6 +39,7 @@
 	<link rel="stylesheet" type="text/css" href="plugins/revolution/revolution/css/layers.css">
 	<link rel="stylesheet" type="text/css" href="plugins/revolution/revolution/css/settings.css">
 	<link rel="stylesheet" type="text/css" href="plugins/revolution/revolution/css/navigation.css">
+	
 	<!-- Revolution Navigation Style -->
 </head>
 <body id="bg">
@@ -127,7 +128,7 @@
 					<div>
 						<label>Photo (optional)</label>
 						<div class="custom-file">
-							<form action="https://jobportalweb.onrender.com/resume" method="POST" enctype="multipart/form-data" id="kko">
+							<form action="#" method="POST" enctype="multipart/form-data" id="kko">
 								<input id="picture" type="file" class="site-button" name="picture" >
 								<input type="text" name="email"   style="display: none;"  id="profile-email" >
 								<button type="submit">submit photo</button>
@@ -250,7 +251,7 @@
 							<input id="ho5" class="form-control" placeholder="Your hobby">
 						</div>
 
-						<button type="button" class="site-button" onclick="generateResume()">Generate Resume</button>
+						<button type="button" class="site-button" onclick="generateResume1	()">Generate Resume</button>
 					</form>
 				</div>
 			</div>
@@ -389,7 +390,7 @@
         event.preventDefault(); // prevent the default form submission behavior
 
         const formData = new FormData(form);
-        const response = await fetch('https://jobportalweb.onrender.com/resume', {
+        const response = await fetch('http://localhost:8002/resume', {
             method: 'POST',
             body: formData
         });

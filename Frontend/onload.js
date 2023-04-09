@@ -11,7 +11,7 @@ else{
     accessToken = (x.split(";")[1]).split("=")[1]
     cookieuserId = (x.split(";")[0]).split("=")[1]
 }
-console.log(accessToken,cookieuserId);
+//console.log(accessToken,cookieuserId);
 $("window").ready(async () => {
   var curr_url = window.location.href.split("/");
   curr_url = curr_url[curr_url.length - 1];
@@ -20,27 +20,30 @@ $("window").ready(async () => {
     //accessToken = "";
     //sessionStorage.removeItem('accessToken')
   }
-console.log(accessToken);
+  //console.log(accessToken);
+  console.log(curr_url);
   $.ajax({
-    url: "https://jobportalweb.onrender.com/" + curr_url,
+    url: "http://localhost:8002/" + curr_url,
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
     },
 
     success: function (req, res, data) {
-      console.log(data);
+      console.log(data.responseText);
       if (data.responseText == "destroy") {
         sessionStorage.removeItem("accessToken");
         sessionStorage.removeItem("user");
         console.log(sessionStorage.getItem("accessToken"));
-        document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 ; path='/Frontend'; domain=127.0.0.1";
+        console.log(document.cookie);
+        document.cookie = "accessToken=; expires=Thu 01 Jan 1970 00:00:00 UTC; path='/Frontend';";
         console.log(document.cookie);
         window.location.href = "mainhome.html";
       } else if (data.responseText == "clogin") {
         sessionStorage.removeItem("accessToken");
         sessionStorage.removeItem("user");
-        document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/Frontend;";
+        document.cookie = "accessToken=; expires=Thu 01 Jan 1970 00:00:00 UTC; path=/Frontend;";
+       // window.location.href = "mainhome.html";
       }
     },
     error: function (error) {
@@ -54,9 +57,9 @@ var curr_url = window.location.href.split("/");
 curr_url = curr_url[curr_url.length - 1];
 
 if (curr_url == "canprofile.html") {
-  console.log(JSON.parse(sessionStorage.getItem('user')));
+
   $.ajax({
-    url: "https://jobportalweb.onrender.com/" + curr_url,
+    url: "http://localhost:8002/" + curr_url,
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -99,7 +102,7 @@ var score ={}
 function submittest(){
   console.log(score);
   $.ajax({
-    url: "https://jobportalweb.onrender.com/" + "scoreUpdate",
+    url: "http://localhost:8002/" + "scoreUpdate",
     type: "POST",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -127,7 +130,7 @@ if(window.location.href.indexOf("test.html")>=0){
   $(document).ready(function(){
       $.ajax({
           type:"GET",
-          url:"https://jobportalweb.onrender.com/"+"test",
+          url:"http://localhost:8002/"+"test",
           beforeSend: function (request) {
             request.setRequestHeader("authorization", "Bearer " + accessToken);
             request.setRequestHeader("name",sessionStorage.getItem('currTest'));
@@ -177,7 +180,7 @@ if(window.location.href.indexOf("test.html")>=0){
 if(window.location.href.indexOf('testpage.html')>=0){
   $("window").ready(async () => {
     $.ajax({
-      url: "https://jobportalweb.onrender.com/" + "testpagerender",
+      url: "http://localhost:8002/" + "testpagerender",
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -223,3 +226,130 @@ if(window.location.href.indexOf('testpage.html')>=0){
 }
 
 
+function displayjobs(jobslist){
+  str_=""
+        for(job_obj of jobslist){
+          str_ += `<li class="parts">
+                <a>
+                    <div class="d-flex m-b30">
+                        <div class="job-post-company">
+                            <span><img src="images/logo/icon1.png"/></span>
+                        </div>
+                        <div class="job-post-info">
+                            <h4>${job_obj.name}</h4>
+                            <ul>
+                                <li><i class="fa fa-map-marker"></i>${job_obj.location}</li>
+                                <li><i class="fa fa-bookmark-o"></i> Full Time</li>
+                                <li><i class="fa fa-clock-o"></i> ${job_obj.createdAt}/li>
+                            </ul>
+                    </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="job-time mr-auto">
+                            <span>
+                                <b><i  class="d-flex" style="width: fit-content; color:blue">skills:</i></b>
+                            </span>
+                            <span>
+                                <ul class="d-flex">
+                                `;
+          str = "";
+          job_obj.skills.forEach((ele) => {
+            str += ` <li><i class=""> ${ele}</i></li>`;
+          });
+          str_ += str;
+          str_ += `</ul>
+                                </span>
+                        </div>
+                        <div class="salary-bx">
+                            <span>$ ${job_obj.salary}</span>
+                        </div>
+                      <div class="clearfix m-b30" style="padding-right: 10px; margin-left:20px">
+                    <button class="btn btn-primary type="button" manclass" onclick="window.location.href='clogin.html'">Apply</button>
+                  </div>
+                    </div></a>
+                  
+            </li>`;
+      }
+      document.querySelector("#manual").innerHTML = str_;
+}
+function afterclick(jobslist){
+  displayjobs((jobslist))
+}
+if(window.location.href.indexOf("mainhome.html")>=0){
+  $("window").ready(async () => {
+    $.ajax({
+      url: "http://localhost:8002/" + "mainhome",
+      type: "GET",
+      
+      success: function (req, res, data) {
+        data=JSON.parse(data.responseText)
+        console.log(data);
+        jobslist=data[0]
+        categories=data[1]
+        testimonals=data[2]
+        blogs=data[3]
+        for(blog of blogs){
+          document.getElementById("blogsss").innerHTML+=`<div class="col-sm-4 mr-3 card">
+          <div class="candidates-are-sys m-b30">
+              <div class="candidates-bx">
+                  <div class="testimonial-pic "><img src="`+blog.imglink+`" alt="" width="350" height="350"></div><br>
+                  <div class="testimonial-text">
+                    <h5>`+blog.title+`</h5><br>
+                      <p>`+blog.blogdesc+`</p>
+                  </div>
+              </div>
+          </div>
+
+       </div>`
+        }
+        for(item of testimonals){
+          console.log(item)
+          document.getElementById("testimonals").innerHTML+=`<div class="item" >
+                                                                <div class="testimonial-5">
+                                                                  <div class="testimonial-text">
+                                                                    <p>`+item.testimonial+`</p>
+                                                                  </div>
+                                                                  <div class="testimonial-detail clearfix">
+                                                                    <div class="testimonial-pic radius shadow">
+                                                                      <img src="`+item.imglink+`" width="100" height="100" alt="">
+                                                                    </div>
+                                                                    <strong class="testimonial-name">`+item.name+`</strong>
+                                                                    
+                                                                  </div>
+                                                                </div>
+                                                              </div><br><br>`
+        }
+        item=testimonals[0]
+        document.getElementById("testone").innerHTML+=`<div class="candidates-bx">
+                                                        <div class="testimonial-pic radius"><img src="`+item.imglink+`"
+                                                            alt="" width="100" height="100"></div>
+                                                        <div class="testimonial-text">
+                                                          <p>`+item.testimonial+`</p>
+                                                        </div>
+                                                        <div class="testimonial-detail"> <strong class="testimonial-name">`+item.name+`</strong> <span class="testimonial-position">`+item.location+`</span>
+                                                        </div>
+      </div>`
+        $("#numberss").html(Object.keys(categories).length+"+ Catetories Jobs wating for you")
+        var str="";
+        for(i in categories){
+          console.log("hjk",i);
+          
+          str+=`<div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="icon-bx-wraper">
+                    <div class="icon-content">
+                      <div class="icon-md text-primary m-b20"><i class="ti-location-pin"></i></div><br>
+                      <button class="btn btn-primary" onclick='afterclick(`+JSON.stringify(categories[i])+`)'><a href="#section1" class="dez-tilte">`+i+`</a></button>
+                      <p class="m-a0">`+categories[i].length+` Jobs available</p>
+                    </div>
+                  </div>				
+                </div>`
+          
+        
+        }
+        document.getElementById("cat").innerHTML = str; 
+        displayjobs(jobslist)
+                                                    
+      }
+    })
+  })
+}

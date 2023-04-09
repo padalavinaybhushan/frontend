@@ -88,7 +88,7 @@
                     <!-- extra nav -->
                     <div class="extra-nav">
                         <div class="extra-cell">
-                            <a href="empprofile.html" class="site-button manual"><i class="fa fa-user mr-1 "></i> profile</a>
+                            <a href="empprofile.html" class="site-button manual" id="profiles"><i class="fa fa-user mr-1 "></i> profile</a>
                         </div>
                     </div>
                     <!-- Quik search -->
@@ -109,15 +109,8 @@
 								<a href="echat.html" style="background-color: #153186; color:#e9d5d5;">chat </i></a>
 							</li>
 							<li>
-								<a href="#">Blog <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="blog-classic.html" class="dez-page">Classic</a></li>
-									<li><a href="blog-classic-sidebar.html" class="dez-page">Classic Sidebar</a></li>
-									<li><a href="blog-detailed-grid.html" class="dez-page">Detailed Grid</a></li>
-									<li><a href="blog-detailed-grid-sidebar.html" class="dez-page">Detailed Grid Sidebar</a></li>
-									<li><a href="blog-left-img.html" class="dez-page">Left Image Sidebar</a></li>
-									<li><a href="blog-details.html" class="dez-page">Blog Details</a></li>
-								</ul>
+								<a href="add-blog.html">Blog </a>
+								
 							</li>
 						</ul>			
                     </div>
@@ -323,7 +316,9 @@
 <script src="plugins/paroller/skrollr.min.js"></script><!-- PAROLLER -->
 <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script>
-    
+    $(document).ready(function(){
+				$("#profiles").html(`<i class="fa fa-user"></i> `+JSON.parse(sessionStorage.getItem("user")).name)
+	})  
 </script>
 
 </body>

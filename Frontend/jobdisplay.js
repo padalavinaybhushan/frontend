@@ -17,23 +17,21 @@ var user = JSON.parse(sessionStorage.getItem("user"));
 if (window.location.href.indexOf("browse-job.html") >= 0) {
   $(document).ready(function () {
     $.ajax({
-      url: "https://jobportalweb.onrender.com/" + curr_url,
+      url: "http://localhost:8002/" + curr_url,
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
         request.setRequestHeader("rec_id", cookieuserId);
       },
-
       success: async function (req, res, data) {
         var job_obj = await JSON.parse(data.responseText);
         console.log(job_obj);
         var user = JSON.parse(sessionStorage.getItem("user"));
+        $("#profiless").html(user.name)
         var html_obj = $("#manual");
-        console.log(html_obj);
         let count = 0;
         var str_ = "";
         while (job_obj[count] != undefined) {
-          console.log(job_obj[count].name);
           str_ += `<li class="parts">
                 <a>
                     <div class="d-flex m-b30">
@@ -91,7 +89,7 @@ if (window.location.href.indexOf("browse-job.html") >= 0) {
 if (window.location.href.indexOf("empprofile.html") >= 0) {
   $(document).ready(function () {
     $.ajax({
-      url: "https://jobportalweb.onrender.com/" + curr_url,
+      url: "http://localhost:8002/" + curr_url,
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -170,7 +168,7 @@ if (window.location.href.indexOf("empprofile.html") >= 0) {
 function BrowseCandidate(event) {
   console.log(event);
   $.ajax({
-    url: "https://jobportalweb.onrender.com/" + "job-data-applied",
+    url: "http://localhost:8002/" + "job-data-applied",
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -194,7 +192,7 @@ if (window.location.href.indexOf("browse-candidates.html") >= 0) {
   $(document).ready(function () {
     //
     $.ajax({
-      url: "https://jobportalweb.onrender.com/" + "job-dataId",
+      url: "http://localhost:8002/" + "job-dataId",
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -306,7 +304,7 @@ if (window.location.href.indexOf("browse-candidates.html") >= 0) {
 
 function fun(obj){
   $.ajax({
-    url: "https://jobportalweb.onrender.com/" + "candDetail",
+    url: "http://localhost:8002/" + "candDetail",
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -331,7 +329,7 @@ if(window.location.href.indexOf('applicant')>=0){
     //document.querySelector('#profile').innerText = user.name 
     $(document).ready(function () {
     $.ajax({
-      url: "https://jobportalweb.onrender.com/" + "resumeDB",
+      url: "http://localhost:8002/" + "resumeDB",
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("canid", user._id);
@@ -416,7 +414,7 @@ function updateJobStatus(event){
   var user = JSON.parse(sessionStorage.getItem('currApplicant'))
   var job_id = sessionStorage.getItem('currJobId')
   $.ajax({
-    url: "https://jobportalweb.onrender.com/" + "updateJobStatus",
+    url: "http://localhost:8002/" + "updateJobStatus",
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -436,7 +434,7 @@ function updateJobStatus(event){
 }
 function CandidateAccept(cand_obj, job_id) {
   $.ajax({
-    url: "https://jobportalweb.onrender.com/" + "jobOffered",
+    url: "http://localhost:8002/" + "jobOffered",
     type: "POST",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -460,7 +458,7 @@ function CandidateAccept(cand_obj, job_id) {
 function CandidateReject(cand_obj, job_id) {
   console.log("hi");
   $.ajax({
-    url: "https://jobportalweb.onrender.com/" + "jobRejected",
+    url: "http://localhost:8002/" + "jobRejected",
     type: "POST",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -483,7 +481,7 @@ function CandidateReject(cand_obj, job_id) {
 function JobApply(event) {
   console.log(event);
   $.ajax({
-    url: "https://jobportalweb.onrender.com/" + "job-data",
+    url: "http://localhost:8002/" + "job-data",
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -503,11 +501,176 @@ function JobApply(event) {
   });
 }
 
+images={
+  amazon:"download/amazon.png",
+  flipkart:"download/flipkart.png",
+  adobe:"download/adobe.png",
+  americanexpress:"download/american express.png",
+  apple:"download/apple.png",
+  att:"download/at&t.png",
+  atlassian:"download/atlassian.png",
+  campbell:"download/campbell.png",
+  carmax:"download/carmax.png",
+  chevron:"download/chevron.png",
+  citi:"download/citi.png",
+  cocacola:"download/cocacola.png",
+  costco:"download/costco.png",
+}
+if(window.location.href.indexOf("companies.html")>=0){
+  if (curr_url.indexOf("companies.html")>=0) {
+    console.log("helloworld")
+    $.ajax({
+      url: "http://localhost:8002/companies",
+      type: "GET",
+      beforeSend: function (request) {
+        request.setRequestHeader("authorization", "Bearer " + accessToken);
+        request.setRequestHeader("canid",JSON.parse(sessionStorage.getItem('user'))._id)
+      },
+      success:function(req,res,data){
+        data=JSON.parse(data.responseText)
+        copy=data
+        console.log(data)
+        
+        jobs=data[1]
+        data=data[0]
+        $("#count").html(Object.keys(data).length+`+ Companies  waiting for you`)
+        for(i in data){
+          document.getElementById("companiess").innerHTML+=`<a href="companydes.html">
+                                                              <div class="col-lg-3 col-md-6 col-sm-6">
+                                                                <div class="icon-bx-wraper">
+                                                                  <div class="icon-content">
+                                                                    <div class="icon-md text-primary m-b20"><img src="`+images[i]+`" alt="asdgh"></div>
+                                                                    
+                                                                    <a  class="dez-tilte" href="#section2"><button class="btn btn-primary" id=`+i+` onclick='companydetails(`+JSON.stringify(copy)+`)'>`+i+`</button></a>
+                                                                    <p class="m-a0">`+data[i]+` Jobs available</p>
+                                                                  </div>
+                                                                </div>				
+                                                              </div>
+                                                            </a>`
+        }        
+      }
+    })
+  }
+}
+
+function companydetails(data){
+  company=event.target.id
+  copy=data[2]
+  noofrec=0
+  counts=data[0]
+  data=data[1]
+  document.getElementById("afterclick").innerHTML=`<div class="container">
+                                                      <div class="row">
+                                                        <div class="col-lg-4">
+                                                          <div class="sticky-top">
+                                                            <div class="row">
+                                                              <div class="col-lg-12 col-md-6">
+                                                                <div class="m-b30">
+                                                                  <img src="`+images[event.target.id]+`" alt="" id="jobdetaillogo">
+                                                                </div>
+                                                              </div>
+                                                              <div class="col-lg-12 col-md-6">
+                                                                <div class="widget bg-white p-lr20 p-t20  widget_getintuch radius-sm">
+                                                                  <h4 class="text-black font-weight-700 p-t10 m-b15 render">Company Details</h4>
+                                                                  <ul>
+                                                                    <li><i class="ti-wallet"></i><strong class="font-weight-700 text-black">Jobs
+                                                                        posted</strong> <span class="render"></span> `+counts[event.target.id]+`</li>
+                                                                    <li><i class="ti-shield"></i><strong
+                                                                        class="font-weight-700 text-black">Experience</strong> <span
+                                                                        class="render"></span>10 Years of Experience</li>
+                                                                    <li><strong class="font-weight-700 text-black">Category:</strong> Software
+                                                                    </li>
+                                                                    <li><strong class="font-weight-700 text-black">No of Recruiters</strong>`+copy[event.target.id]+`
+                                                                    </li>
+                                                                  </ul>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div id="section2" class="col-lg-8">
+                                                          <div class="job-info-box">
+                                                            <h3 class="m-t0 m-b10 font-weight-700 title-head">
+                                                              <a  href="#" class="text-secondry m-r30"><span class="render"></span></a>
+                                                            </h3>
+                                                            <p class="p-t20"></p>
+                                                            <h5 class="font-weight-600">Jobs posted</h5>
+                                                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+                                                            <p class="render"></p>
+                                                            <!-- <h5 class="font-weight-600">Job Requirements</h5>
+                                                          <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+                                                          <p class="render"></p> -->
+                                                            <div class="container">
+                                                              <ul class="post-job-bx" id="manual">
+                                                              </ul>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>`
+  let count = 0;
+  var str_ = "";
+  company=event.target.id
+  {
+    jobslist=data[company]
+    for(job_obj of jobslist[0]){
+      str_ += `<li class="parts">
+            <a>
+                <div class="d-flex m-b30">
+                    <div class="job-post-company">
+                        <span><img src="images/logo/icon1.png"/></span>
+                    </div>
+                    <div class="job-post-info">
+                        <h4>${job_obj.name}</h4>
+                        <ul>
+                            <li><i class="fa fa-map-marker"></i>${job_obj.location}</li>
+                            <li><i class="fa fa-bookmark-o"></i> Full Time</li>
+                            <li><i class="fa fa-clock-o"></i> ${job_obj.createdAt}/li>
+                        </ul>
+                </div>
+                </div>
+                <div class="d-flex">
+                    <div class="job-time mr-auto">
+                        <span>
+                            <b><i  class="d-flex" style="width: fit-content; color:blue">skills:</i></b>
+                        </span>
+                        <span>
+                            <ul class="d-flex">
+                            `;
+      str = "";
+      job_obj.skills.forEach((ele) => {
+        str += ` <li><i class=""> ${ele}</i></li>`;
+      });
+      str_ += str;
+      str_ += `</ul>
+                            </span>
+                    </div>
+                    <div class="salary-bx">
+                        <span>$ ${job_obj.salary}</span>
+                    </div>
+                  <div class="clearfix m-b30" style="padding-right: 10px; margin-left:20px">
+                <button class="btn btn-primary type="button" manclass" onclick="JobApply('${job_obj.createdAt}')">Apply</button>
+              </div>
+                </div></a>
+              
+        </li>`;
+
+      count++;      
+    }
+    
+  }
+  document.querySelector("#manual").innerHTML = str_;
+
+}
+
+
+
+
+
 function JobWithDraw(event) {
   //job-del
-  console.log(event);
   $.ajax({
-    url: "https://jobportalweb.onrender.com/" + "job-del",
+    url: "http://localhost:8002/" + "job-del",
     type: "POST",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -559,7 +722,7 @@ if (window.location.href.indexOf("job-detail") >= 0) {
   // )
   function applyJob() {
     $.ajax({
-      url: "https://jobportalweb.onrender.com/" + "job-detail.html",
+      url: "http://localhost:8002/" + "job-detail.html",
       type: "POST",
       beforeSend: function (request) {
         request.setRequestHeader("Authorization", "Bearer " + accessToken);
@@ -581,6 +744,26 @@ if (window.location.href.indexOf("job-detail") >= 0) {
   }
 }
 
+// $(document).ready(function(){
+//   $("#formdata").submit(function(){
+//       var data = new FormData($('#formdata')[0]);
+//       $.ajax({
+//           url:'http://localhost:8002/resumeDB',
+//           type: 'POST',
+//           contentType: false,
+//           processData: false,
+//           enctype:"multipart/form-data",
+//           cache: false,
+//           data: data,
+//           error: function(){
+//               alert('Error: In sending the request!');
+//           },
+//           success:(data)=>{
+//             console.log(data)
+//           }
+//       })
+//   })
+// })
 function detailJob(event){
   sessionStorage.setItem('detailjob',event)
   window.location.href="detailjob.html"
@@ -592,7 +775,7 @@ if(window.location.href.indexOf("detailjob.html")>=0){
   console.log(JSON.parse(sessionStorage.getItem('user'))._id);
   $(document).ready(function () {
     $.ajax({
-      url: "https://jobportalweb.onrender.com/" + "job-detail.html",
+      url: "http://localhost:8002/" + "job-detail.html",
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -666,7 +849,7 @@ if(window.location.href.indexOf("detailjob.html")>=0){
 if (window.location.href.indexOf("jobsapplied.html") >= 0) {
   $(document).ready(function () {
     $.ajax({
-      url: "https://jobportalweb.onrender.com/" + curr_url,
+      url: "http://localhost:8002/" + curr_url,
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);

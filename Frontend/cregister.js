@@ -8,6 +8,7 @@ function cregister(){
     var x = document.cookie 
     var accessToken;
     var cookieuserId;
+    console.log("cregister");
     if((x.split(";")[0]).split("=")[0].indexOf("access")>=0){
         accessToken = (x.split(";")[0]).split("=")[1]
         cookieuserId = (x.split(";")[1]).split("=")[1]
@@ -17,7 +18,7 @@ function cregister(){
         cookieuserId = (x.split(";")[0]).split("=")[1]
     }
     $.ajax({
-        url:"https://jobportalweb.onrender.com/"+curr_url,
+        url:"http://localhost:8002/"+curr_url,
         type:'POST',
         beforeSend: function(request) {
             request.setRequestHeader("Authorization", "Bearer "+accessToken);
@@ -60,7 +61,7 @@ function recregister(){
         cookieuserId = (x.split(";")[0]).split("=")[1]
     }
     $.ajax({
-        url:"https://jobportalweb.onrender.com/"+curr_url,
+        url:"http://localhost:8002/"+curr_url,
         type:'POST',
         beforeSend: function(request) {
             request.setRequestHeader("Authorization", "Bearer "+accessToken);
@@ -89,7 +90,16 @@ if(window.location.href.indexOf("cedit")>=0 || window.location.href.indexOf("rec
     $('#email').html(JSON.parse(sessionStorage.getItem('user')).email)
    // console.log(document.getElementById('kko'));
     document.querySelector('#profile-email').value = JSON.parse(sessionStorage.getItem('user')).email
-    })
+   
+    document.querySelector('#fullname').value = JSON.parse(sessionStorage.getItem('user')).name 
+    document.querySelector('#phone1').value = JSON.parse(sessionStorage.getItem('user')).phone1
+    document.querySelector('#phone2').value = JSON.parse(sessionStorage.getItem('user')).phone2
+    document.querySelector('#address').value = JSON.parse(sessionStorage.getItem('user')).address
+    document.querySelector('#designation').value = JSON.parse(sessionStorage.getItem('user')).designation
+    document.querySelector('#company').value = JSON.parse(sessionStorage.getItem('user')).company
+    document.querySelector('#github').value = JSON.parse(sessionStorage.getItem('user')).github 
+    document.querySelector('#linkedin').value = JSON.parse(sessionStorage.getItem('user')).linkedin
+})
 }
 
 
@@ -109,7 +119,7 @@ function cupdate(event){
     }
     console.log(JSON.parse(sessionStorage.getItem('user')));
     $.ajax({
-        url:"https://jobportalweb.onrender.com/"+event,
+        url:"http://localhost:8002/"+event,
         type:'POST',
         beforeSend: function(request) {
             request.setRequestHeader("Authorization", "Bearer "+accessToken);

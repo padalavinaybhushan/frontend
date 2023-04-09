@@ -21,7 +21,7 @@ function login(){
     //console.log(x);
     
     $.ajax({
-        url:"https://jobportalweb.onrender.com/"+curr_url,
+        url:"http://localhost:8002/"+curr_url,
         type:'POST',
         contentType: "application/json",
         data : JSON.stringify({
@@ -31,7 +31,6 @@ function login(){
         beforeSend: function(request) {
             request.setRequestHeader("Authorization", accessToken);
           },
-       
         success:function(req,res,data){
             var received = JSON.parse(data.responseText)
             if(received["noUser"]){
@@ -39,8 +38,7 @@ function login(){
                 //window.location.href="http://127.0.0.1:5501/Frontend/error-404.html"
             }
             else{
-                
-                console.log(received);
+                //console.log(received);
                 sessionStorage.setItem('accessToken',received["accessToken"]);
                 console.log(received['user']);
                 console.log(received['accessToken']);
@@ -48,35 +46,30 @@ function login(){
                 document.cookie="userId="+received["user"]._id 
                 sessionStorage.setItem('user',JSON.stringify(received["user"]));
                 console.log(sessionStorage.getItem('user'));
-                console.log(document.cookie);
+                console.log(document.cookie,11,accessToken);
                 if(curr_url == "clogin.html")
                 window.location.href = "browse-job.html"
                 else 
                 window.location.href = "postjob.html" 
             }
+            $.ajax({
+                type:"POST",
+                url:"http://localhost:8002/sendemail",
+                headers:{
+                    "token":sessionStorage.getItem("accessToken"),
+                },
+                contentType:"application/json",
+                data:JSON.stringify({
+                    email:JSON.parse(sessionStorage.getItem("user")).email,
+                 }),
+              
+                success:(data)=>{
+                    window.location.href="browse-job.html"
+                }
+            })
             
-        },
-        error:function(err){
-            console.log(err);
         }
+        
     })
 }
 
-
-function google(){
-    console.log("lppppp");
-    $.ajax({
-        url:"https://jobportalweb.onrender.com/tempoo",
-        beforeSend: function (request) {
-            request.setRequestHeader("Access-Control-Allow-Origin", '*');
-          },
-        type:'GET',
-        success : async function(req,res,data){
-            console.log(data)
-        },
-        error: function(error){
-            console.log(error);
-        }
-    })
-    //window.location.href = "http://localhost:8002/auth/google"
-}

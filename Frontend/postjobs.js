@@ -19,7 +19,7 @@ function postJob(){
     cookieuserId = (x.split(";")[1]).split("=")[1]
     console.log(accessToken);
     $.ajax({
-        url:"https://jobportalweb.onrender.com/"+"postjob.html",
+        url:"http://localhost:8002/"+"postjob.html",
         type:'POST',
         beforeSend: function(request) {
             request.setRequestHeader("Authorization", "Bearer "+accessToken);
@@ -32,6 +32,8 @@ function postJob(){
             Experience:$('#exp').val(),
             skills:$('#skill').val(),
             salary:$('#salary').val(),
+            jobreq:$('#jobreq').val(),
+            category:$('category').val(),
             createrId:JSON.parse(sessionStorage.getItem('user'))["_id"]
         }),
         success:function(req,res,data){

@@ -169,7 +169,7 @@ a {
                 <div class="container clearfix">
                     <!-- website logo -->
                     <div class="logo-header mostion">
-						<a href="index-2.html"><img src="images/logo.png" class="logo" alt=""></a>
+						<a href="postjob.html"><img src="images/logo.png" class="logo" alt=""></a>
 					</div>
                     <!-- nav toggle button -->
                     <!-- nav toggle button -->
@@ -181,7 +181,7 @@ a {
                     <!-- extra nav -->
                     <div class="extra-nav">
                         <div class="extra-cell">
-                            <a href="empprofile.html" class="site-button"><i class="fa fa-user"></i> Profile</a>
+                            <a href="empprofile.html" class="site-button" id="profiless"><i class="fa fa-user"></i> Profile</a>
                         </div>
                     </div>
                     <!-- Quik search -->
@@ -383,6 +383,11 @@ a {
 <script src="plugins/paroller/skrollr.min.js"></script>PAROLLER
 <script src="browse-candidates.js" async></script>
 <script src="keyword_location_filter.js" async></script>
+<script>
+  $(document).ready(function(){
+				$("#profiles").html(`<i class="fa fa-user"></i> `+JSON.parse(sessionStorage.getItem("user")).name)
+			})
+</script>
 </body>
 
 

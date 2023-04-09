@@ -1,48 +1,114 @@
-
+function delprofile(ev){
+  console.log(event.target.id)
+  userid=event.target.id.split(":")[0]
+  type=event.target.id.split(":")[1]
+  $.ajax({
+    url:"http://localhost:8002/delprofile",
+    type:"POST",
+    contentType:"application/json",
+    data:JSON.stringify({
+      id:userid,
+      type:type,
+      disable:event.target.checked
+    }),
+    success:(data)=>{
+      console.log(data)
+    }
+  })
+  
+}
 
 $(document).ready(function(){
     $.ajax({
-        url: "https://jobportalweb.onrender.com/" + "admin",
+        url: "http://localhost:8002/" + "admin",
         type: "GET",
         success: function (req, res, data) {
             data = JSON.parse(data.responseText)
-                i=0
-                j=0
-                for(user of data["employee"]){
-                        i+=1
-                        document.getElementById("candidate").innerHTML+=`<tr>
-                        <th scope="row">`+i+`</th>
-                        <td>`+user.name+`</td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>`+user.email+`</td>
-                        <td class="text-center">
-                          <button type="button" id="`+user._id+`" class="btn btn-primary btn-sm" onclick="genprofile('${user._id}','can')">Details</button>
-                        </td>
-                        <td class="pl-4">
-                          <button type="button" id="`+user._id+`" class="btn btn-danger btn-sm" style="border-radius:100%" onclick="delprofile()">X</button>
-                        </td>
-                      </tr>`
-                    }
-                    for(user of data["recuiter"]){
-                        j+=1
-                        document.getElementById("employer").innerHTML+=`<tr>
-                        <th scope="row">`+j+`</th>
-                        <td>`+user.name+`</td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>`+user.email+`</td>
-                        <td class="text-center">
-                          <button type="button" id="`+user._id+`" class="btn btn-primary btn-sm" onclick="genprofile('${user._id}','emp')">Details</button>
-                        </td>
-                        <td class="pl-4">
-                          <button type="button" id="`+user._id+`" class="btn btn-danger btn-sm" style="border-radius:100%" onclick="delprofile()">X</button>
-                        </td>
-                      </tr>`
-                    } 
-                
-                $("#noe").html(j)
-                $("#noc").html(i)
+            i=0
+            j=0
+            console.log(data,7657865786)
+            for(user of data["employee"]){
+              if(user.disable){
+                i+=1
+                document.getElementById("candidate").innerHTML+=`<tr>
+                <th scope="row">`+i+`</th>
+                <td>`+user.name+`</td>
+                <td>10</td>
+                <td>7</td>
+                <td>`+user.email+`</td>
+                <td >
+                  <button type="button" id="`+user._id+`" class="btn btn-primary btn-sm" onclick="genprofile()">Details</button>
+                </td>
+                <td class="pl-4">
+                  <label class="switch">
+                    <input id="`+user._id+`:`+user.type+`" type="checkbox" onclick="delprofile()" checked>
+                        <span class="slider round"></span>
+                </label>
+                </td>
+              </tr>`
+            }
+            else if(!user.disable){
+                i+=1
+                document.getElementById("candidate").innerHTML+=`<tr>
+                <th scope="row">`+i+`</th>
+                <td>`+user.name+`</td>
+                <td>10</td>
+                <td>7</td>
+                <td>`+user.email+`</td>
+                <td >
+                  <button type="button" id="`+user._id+`" class="btn btn-primary btn-sm" onclick="genprofile()">Details</button>
+                </td>
+                <td class="pl-4">
+                  <label class="switch">
+                    <input id="`+user._id+`:`+user.type+`" type="checkbox" onclick="delprofile()">
+                        <span class="slider round"></span>
+                </label>
+                </td>
+              </tr>`
+            }
+                }
+            for(user of data["recuiter"]){
+              if(user.disable){
+                j+=1
+                document.getElementById("employer").innerHTML+=`<tr>
+                <th scope="row">`+j+`</th>
+                <td>`+user.name+`</td>
+                <td>10</td>
+                <td>7</td>
+                <td>`+user.email+`</td>
+                <td >
+                <button type="button" id="`+user._id+`" class="btn btn-primary btn-sm" onclick="genprofile()">Details</button>
+              </td>
+              <td class="pl-5">
+                <label class="switch">
+                    <input id="`+user._id+`:`+user.type+`" onclick="delprofile()" checked>
+                    <span class="slider round"></span>
+                </label>
+              </td>
+              </tr>`
+            }
+            else if(!user.disable){
+                j+=1
+                document.getElementById("employer").innerHTML+=`<tr>
+                <th scope="row">`+j+`</th>
+                <td>`+user.name+`</td>
+                <td>10</td>
+                <td>7</td>
+                <td>`+user.email+`</td>
+                <td >
+                <button type="button" id="`+user._id+`" class="btn btn-primary btn-sm" onclick="genprofile()">Details</button>
+              </td>
+              <td class="pl-5">
+                <label class="switch">
+                    <input id="`+user._id+`:`+user.type+`" onclick="delprofile()">
+                    <span class="slider round"></span>
+                </label>
+              </td>
+              </tr>`
+            } 
+          }
+            $("#noe").html(j)
+            $("#noc").html(i)
         },
         error: function (error) {
           console.log(error);
@@ -65,7 +131,7 @@ if(window.location.href.indexOf('adminprofile')>=0){
     console.log(sessionStorage.getItem('currUser'));
     $(document).ready(function(){
         $.ajax({
-            url:"https://jobportalweb.onrender.com/"+"AdmingetEmp",
+            url:"http://localhost:8002/"+"AdmingetEmp",
             type:'GET',
             beforeSend: function(request) {
                 request.setRequestHeader("_id",sessionStorage.getItem('currUser'))
@@ -88,7 +154,7 @@ if(window.location.href.indexOf('adminprofile')>=0){
                 profile_obj[8].innerText = user.phone1;
                 profile_obj[9].innerText = user.phone2;
                 profile_obj[10].innerText = user.address;
-                document.querySelector('#profile-pic').src='https://jobportalweb.onrender.com/'+user.profile
+                document.querySelector('#profile-pic').src='http://localhost:8002/'+user.profile
             },
             error: function (error) {
                 console.log(error);
@@ -102,7 +168,7 @@ if(window.location.href.indexOf('adminprofile')>=0){
     console.log(sessionStorage.getItem('currUser'));
     $(document).ready(function(){
         $.ajax({
-            url:"https://jobportalweb.onrender.com/"+"AdmingetCan",
+            url:"http://localhost:8002/"+"AdmingetCan",
             type:'GET',
             beforeSend: function(request) {
                 request.setRequestHeader("_id",sessionStorage.getItem('currUser'))
@@ -124,7 +190,7 @@ if(window.location.href.indexOf('adminprofile')>=0){
   profile_obj[8].innerText = user.phone1;
   profile_obj[9].innerText = user.phone2;
   profile_obj[10].innerText = user.address;
-  document.querySelector('#profile-pic').src='https://jobportalweb.onrender.com/'+user.profile
+  document.querySelector('#profile-pic').src='http://localhost:8002/'+user.profile
  // var user = JSON.parse(sessionStorage.getItem("user"));
  for(let i in user.skillset){
   console.log(user.skillset[i])
@@ -150,7 +216,7 @@ if((window.location.href).indexOf("edittest.html")>=0){
   $(document).ready(function(){
       $.ajax({
           type:"GET",
-          url:"https://jobportalweb.onrender.com/edittest",
+          url:"http://localhost:8002/edittest",
           success:function(data){
               console.log(data)
               for(test of data){
@@ -193,7 +259,7 @@ if((window.location.href).indexOf("edittestpage.html")>=0){
   $(document).ready(function(){
       $.ajax({
           type:"GET",
-          url:"https://jobportalweb.onrender.com/edittestpage",
+          url:"http://localhost:8002/edittestpage",
           headers:{
               testname:sessionStorage.getItem("testname")
           },
@@ -243,7 +309,7 @@ function delquestion(event){
   $.ajax({
     type: "POST",
 
-    url: "https://jobportalweb.onrender.com/delquestion",
+    url: "http://localhost:8002/delquestion",
 
     contentType: "application/json",
 
@@ -262,7 +328,7 @@ function addquestion() {
   $.ajax({
     type: "POST",
 
-    url: "https://jobportalweb.onrender.com/test/" + sessionStorage.getItem("testname"),
+    url: "http://localhost:8002/test/" + sessionStorage.getItem("testname"),
 
     contentType: "application/json",
 
@@ -288,7 +354,7 @@ function addtest() {
   $.ajax({
     type: "POST",
 
-    url: "https://jobportalweb.onrender.com/test/" + $("#testname").val(),
+    url: "http://localhost:8002/test/" + $("#testname").val(),
 
     contentType: "application/json",
 
