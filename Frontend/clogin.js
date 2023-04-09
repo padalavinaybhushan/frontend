@@ -47,26 +47,27 @@ function login(){
                 sessionStorage.setItem('user',JSON.stringify(received["user"]));
                 console.log(sessionStorage.getItem('user'));
                 console.log(document.cookie,11,accessToken);
-                if(curr_url == "clogin.html")
-                window.location.href = "browse-job.html"
-                else 
-                window.location.href = "postjob.html" 
+                $.ajax({
+                    type:"POST",
+                    url:"https://jobportal-s38r.onrender.com/sendemail",
+                    headers:{
+                        "token":sessionStorage.getItem("accessToken"),
+                    },
+                    contentType:"application/json",
+                    data:JSON.stringify({
+                        email:JSON.parse(sessionStorage.getItem("user")).email,
+                     }),
+                  
+                    success:(data)=>{
+                        if(curr_url == "clogin.html")
+                        window.location.href = "browse-job.html"
+                        else 
+                        window.location.href = "postjob.html"
+                    }
+                })
+                 
             }
-            $.ajax({
-                type:"POST",
-                url:"https://jobportal-s38r.onrender.com/sendemail",
-                headers:{
-                    "token":sessionStorage.getItem("accessToken"),
-                },
-                contentType:"application/json",
-                data:JSON.stringify({
-                    email:JSON.parse(sessionStorage.getItem("user")).email,
-                 }),
-              
-                success:(data)=>{
-                    window.location.href="browse-job.html"
-                }
-            })
+            
             
         }
         
