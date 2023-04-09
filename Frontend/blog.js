@@ -3,7 +3,7 @@ function editbtnss(){
     console.log("hello")
     $.ajax({
         type:"POST",
-        url:"http://localhost:5000/editblog",
+        url:"https://jobportal-s38r.onrender.com/editblog",
         contentType:"application/json",
         data:JSON.stringify({
             title:$("#title").val(),
@@ -34,7 +34,7 @@ if((window.location.href).indexOf("editblog")>=0){
         document.querySelector('#bbb').value = sessionStorage.getItem('blogid')
         // $.ajax({
         //     type:"GET",
-        //     url:"http://localhost:8002/editblog",
+        //     url:"https://jobportal-s38r.onrender.com/editblog",
         //     headers:{
         //         "token":sessionStorage.getItem("accessToken"),
         //         // btnid:sessionStorage.getItem("editblog")
@@ -67,7 +67,7 @@ if((window.location.href).indexOf("editblog")>=0){
 //     console.log("hi");
 //     $.ajax({
 //         type:"POST",
-//         url:"http://localhost:8002/add-blog",
+//         url:"https://jobportal-s38r.onrender.com/add-blog",
 //         processData:false,
 //         contentType:false,
 //         enctype:"multipart/form-data",
@@ -93,7 +93,7 @@ if((window.location.href).indexOf("add-blog")>=0){
         document.querySelector('#useridblog').value = JSON.parse(sessionStorage.getItem('user'))._id
         $.ajax({
             type:"GET",
-            url:"http://localhost:8002/add-blog",
+            url:"https://jobportal-s38r.onrender.com/add-blog",
             headers:{
                 "token":sessionStorage.getItem("accessToken")
             },
@@ -161,7 +161,7 @@ if((window.location.href).indexOf("testimonials")>=0){
     $(document).ready(function(){
         $.ajax({
             type:"GET",
-            url:"http://localhost:8002/testimonials",
+            url:"https://jobportal-s38r.onrender.com/testimonials",
             headers:{
                 "token":sessionStorage.getItem("accessToken")
             },

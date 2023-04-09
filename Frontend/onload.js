@@ -23,7 +23,7 @@ $("window").ready(async () => {
   //console.log(accessToken);
   console.log(curr_url);
   $.ajax({
-    url: "http://localhost:8002/" + curr_url,
+    url: "https://jobportal-s38r.onrender.com/" + curr_url,
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -59,7 +59,7 @@ curr_url = curr_url[curr_url.length - 1];
 if (curr_url == "canprofile.html") {
 
   $.ajax({
-    url: "http://localhost:8002/" + curr_url,
+    url: "https://jobportal-s38r.onrender.com/" + curr_url,
     type: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -102,7 +102,7 @@ var score ={}
 function submittest(){
   console.log(score);
   $.ajax({
-    url: "http://localhost:8002/" + "scoreUpdate",
+    url: "https://jobportal-s38r.onrender.com/" + "scoreUpdate",
     type: "POST",
     beforeSend: function (request) {
       request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -130,7 +130,7 @@ if(window.location.href.indexOf("test.html")>=0){
   $(document).ready(function(){
       $.ajax({
           type:"GET",
-          url:"http://localhost:8002/"+"test",
+          url:"https://jobportal-s38r.onrender.com/"+"test",
           beforeSend: function (request) {
             request.setRequestHeader("authorization", "Bearer " + accessToken);
             request.setRequestHeader("name",sessionStorage.getItem('currTest'));
@@ -180,7 +180,7 @@ if(window.location.href.indexOf("test.html")>=0){
 if(window.location.href.indexOf('testpage.html')>=0){
   $("window").ready(async () => {
     $.ajax({
-      url: "http://localhost:8002/" + "testpagerender",
+      url: "https://jobportal-s38r.onrender.com/" + "testpagerender",
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -278,7 +278,7 @@ function afterclick(jobslist){
 if(window.location.href.indexOf("mainhome.html")>=0){
   $("window").ready(async () => {
     $.ajax({
-      url: "http://localhost:8002/" + "mainhome",
+      url: "https://jobportal-s38r.onrender.com/" + "mainhome",
       type: "GET",
       
       success: function (req, res, data) {

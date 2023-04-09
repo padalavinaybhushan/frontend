@@ -18,7 +18,7 @@ function cregister(){
         cookieuserId = (x.split(";")[0]).split("=")[1]
     }
     $.ajax({
-        url:"http://localhost:8002/"+curr_url,
+        url:"https://jobportal-s38r.onrender.com/"+curr_url,
         type:'POST',
         beforeSend: function(request) {
             request.setRequestHeader("Authorization", "Bearer "+accessToken);
@@ -61,7 +61,7 @@ function recregister(){
         cookieuserId = (x.split(";")[0]).split("=")[1]
     }
     $.ajax({
-        url:"http://localhost:8002/"+curr_url,
+        url:"https://jobportal-s38r.onrender.com/"+curr_url,
         type:'POST',
         beforeSend: function(request) {
             request.setRequestHeader("Authorization", "Bearer "+accessToken);
@@ -119,7 +119,7 @@ function cupdate(event){
     }
     console.log(JSON.parse(sessionStorage.getItem('user')));
     $.ajax({
-        url:"http://localhost:8002/"+event,
+        url:"https://jobportal-s38r.onrender.com/"+event,
         type:'POST',
         beforeSend: function(request) {
             request.setRequestHeader("Authorization", "Bearer "+accessToken);

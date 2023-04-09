@@ -21,7 +21,7 @@ function login(){
     //console.log(x);
     
     $.ajax({
-        url:"http://localhost:8002/"+curr_url,
+        url:"https://jobportal-s38r.onrender.com/"+curr_url,
         type:'POST',
         contentType: "application/json",
         data : JSON.stringify({
@@ -54,7 +54,7 @@ function login(){
             }
             $.ajax({
                 type:"POST",
-                url:"http://localhost:8002/sendemail",
+                url:"https://jobportal-s38r.onrender.com/sendemail",
                 headers:{
                     "token":sessionStorage.getItem("accessToken"),
                 },

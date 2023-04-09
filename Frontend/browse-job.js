@@ -20,7 +20,7 @@ function filter(){
   var location = document.querySelector('#landmark').value;
   var skill = document.querySelector('#searching').value;
   $.ajax({
-      url: "http://localhost:8002/browse-job-filter",
+      url: "https://jobportal-s38r.onrender.com/browse-job-filter",
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);

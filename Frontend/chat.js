@@ -17,7 +17,7 @@ socket.on("getmessage",data=>{
 if(window.location.href.indexOf("cchat.html")>=0){
     $(document).ready(function(){
         $.ajax({
-            url:"http://localhost:8002/conversations",
+            url:"https://jobportal-s38r.onrender.com/conversations",
             type:"GET",
             headers:{
                 id:JSON.parse(sessionStorage.getItem("user"))._id,
@@ -92,7 +92,7 @@ function godown(){
 
 function clearss(ev){
     $.ajax({
-        url:"http://localhost:8002/messages",
+        url:"https://jobportal-s38r.onrender.com/messages",
         type:"GET",
         headers:{
             members:[event.target.id,JSON.parse(sessionStorage.getItem("user"))._id],
@@ -142,7 +142,7 @@ if(window.location.href.indexOf("echat.html")>=0){
     $(document).ready(function(){
         console.log("fghjkl");
         $.ajax({
-            url:"http://localhost:8002/conversations",
+            url:"https://jobportal-s38r.onrender.com/conversations",
             type:"GET",
             headers:{
                 id:JSON.parse(sessionStorage.getItem("user"))._id,
@@ -219,7 +219,7 @@ if(window.location.href.indexOf("echat.html")>=0){
 function conversationstart(){
     $.ajax({
         type:"POST",
-        url:"http://localhost:8002/conversations",
+        url:"https://jobportal-s38r.onrender.com/conversations",
         contentType:"application/json",
         data:JSON.stringify({
             ids:[JSON.parse(sessionStorage.getItem("user"))._id,JSON.parse(sessionStorage.getItem("currApplicant"))._id]
@@ -237,7 +237,7 @@ function sendmessage(ev){
     console.log(message)
     $.ajax({
         type:"POST",
-        url:"http://localhost:8002/messages",
+        url:"https://jobportal-s38r.onrender.com/messages",
         contentType:"application/json",
         data:JSON.stringify({
             conversationid:sessionStorage.getItem("coversationid"),

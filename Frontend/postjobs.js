@@ -19,7 +19,7 @@ function postJob(){
     cookieuserId = (x.split(";")[1]).split("=")[1]
     console.log(accessToken);
     $.ajax({
-        url:"http://localhost:8002/"+"postjob.html",
+        url:"https://jobportal-s38r.onrender.com/"+"postjob.html",
         type:'POST',
         beforeSend: function(request) {
             request.setRequestHeader("Authorization", "Bearer "+accessToken);
