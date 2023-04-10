@@ -19,7 +19,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
 	
 	<!-- PAGE TITLE HERE -->
-	<title>JobBoard - HTML Template</title>
+	<title>JobBoard</title>
 	
 	<!-- MOBILE SPECIFIC -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,9 +63,9 @@
 					</button>
                     <!-- extra nav -->
                     <div class="extra-nav">
-                        <div class="extra-cell">
+                        <!-- <div class="extra-cell">
                             <a href="canprofile.html" class="site-button"><i class="fa fa-user"></i> profile</a>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- Quik search -->
                     <div class="dez-quik-search bg-primary">
@@ -77,19 +77,15 @@
                     <!-- main nav -->
                     <div class="header-nav navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
                         <ul class="nav navbar-nav">
+									
+									<li><a href="job-detail.html" class="dez-page" style="background-color: #153186; color:#e9d5d5;">Job Detail</a></li>
 									<li><a href="browse-job.html" class="dez-page">Browse Job</a></li>
 									<li><a href="companies.html" class="dez-page">companies</a></li>
-									<li><a href="job-detail.html" class="dez-page" style="background-color: #153186; color:#e9d5d5;">Job Detail</a></li>
-							<li>
-								<a href="#">Blog <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="blog-classic.html" class="dez-page">Classic</a></li>
-									<li><a href="blog-classic-sidebar.html" class="dez-page">Classic Sidebar</a></li>
-									<li><a href="blog-detailed-grid.html" class="dez-page">Detailed Grid</a></li>
-									<li><a href="blog-detailed-grid-sidebar.html" class="dez-page">Detailed Grid Sidebar</a></li>
-									<li><a href="blog-left-img.html" class="dez-page">Left Image Sidebar</a></li>
-									<li><a href="blog-details.html" class="dez-page">Blog Details</a></li>
-								</ul>
+									<li>
+								<a href="add-blog.html">Blog</a>
+							
+							</li>
+							<li>      <a href="canprofile.html" class=""><i class="fa fa-user"></i> profile</a>
 							</li>
 						</ul>			
                     </div>
@@ -167,7 +163,7 @@
 									<input type="text" name="canId"   style="display: none;"  id="canId" >
 									<input type="text" name="jobId"   style="display: none;"  id="jobId" >
 									<button type="submit">submit resume</button>
-								</form>
+								</form><br>
 								<button class="btn btn-primary" type="button" onclick="applyJob()">Apply This Job</button>
 							</div>
 						</div>

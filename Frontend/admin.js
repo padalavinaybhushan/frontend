@@ -2,6 +2,7 @@ function delprofile(ev){
   console.log(event.target.id)
   userid=event.target.id.split(":")[0]
   type=event.target.id.split(":")[1]
+  console.log(userid,type)
   $.ajax({
     url:"https://jobportal-s38r.onrender.com/delprofile",
     type:"POST",
@@ -15,7 +16,6 @@ function delprofile(ev){
       console.log(data)
     }
   })
-  
 }
 
 $(document).ready(function(){
