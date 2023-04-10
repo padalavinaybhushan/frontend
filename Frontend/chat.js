@@ -1,4 +1,4 @@
-const socket=io("ws://localhost:8900")
+const socket=io("ws://jobportal-s38r.onrender.com/:8900")
 socket.on("getmessage",data=>{
     message=data[0]
     oppositeid=data[1]
