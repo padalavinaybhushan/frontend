@@ -41,8 +41,7 @@ function postJob(){
                 window.location.href="www.google.com"
             }
             else{
-                alert('job added successful')
-               // window.location.href = "postJob.html"
+               window.location.href = "empprofile.html"
             }
             
         }

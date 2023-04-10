@@ -736,7 +736,8 @@ if (window.location.href.indexOf("job-detail") >= 0) {
         if (!data) {
           window.location.href = "www.google.com";
         } else {
-          alert("job added successful");
+          //alert("job added successful");
+          window.location.href = "jobsapplied.html"
           // window.location.href = "http://127.0.0.1:5501/Frontend/postJob.html"
         }
       },
