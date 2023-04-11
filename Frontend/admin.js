@@ -81,7 +81,7 @@ $(document).ready(function(){
               </td>
               <td class="pl-5">
                 <label class="switch">
-                    <input id="`+user._id+`:`+user.type+`" onclick="delprofile()" checked>
+                    <input id="`+user._id+`:`+user.type+`" type="checkbox" onclick="delprofile()" checked>
                     <span class="slider round"></span>
                 </label>
               </td>
@@ -100,7 +100,7 @@ $(document).ready(function(){
               </td>
               <td class="pl-5">
                 <label class="switch">
-                    <input id="`+user._id+`:`+user.type+`" onclick="delprofile()">
+                    <input id="`+user._id+`:`+user.type+`" type="checkbox" onclick="delprofile()">
                     <span class="slider round"></span>
                 </label>
               </td>
@@ -328,13 +328,13 @@ function addquestion() {
   $.ajax({
     type: "POST",
 
-    url: "https://jobportal-s38r.onrender.com/test/" + sessionStorage.getItem("testname"),
+    url: "https://jobportal-s38r.onrender.com/testname",
 
     contentType: "application/json",
 
     data: JSON.stringify({
       question: $("#question").val(),
-
+      name:sessionStorage.getItem("testname"),
       options: [$("#a").val(), $("#b").val(), $("#c").val(), $("#d").val()],
 
       ans: $("#ans").val(),
@@ -354,7 +354,7 @@ function addtest() {
   $.ajax({
     type: "POST",
 
-    url: "http://localhost:8002/testname" ,
+    url: "https://jobportal-s38r.onrender.com/testname" ,
 
     contentType: "application/json",
 
@@ -371,5 +371,8 @@ function addtest() {
 
       //window.location.href = "addtest.html";
     },
+    error:function(err){
+      console.log(err);
+    }
   });
 }

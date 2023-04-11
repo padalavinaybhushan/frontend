@@ -18,6 +18,7 @@ if (window.location.href.indexOf("browse-job.html") >= 0) {
   $(document).ready(function () {
     $.ajax({
       url: "https://jobportal-s38r.onrender.com/" + curr_url,
+      //url:"http://localhost:8002/"+curr_url,
       type: "GET",
       beforeSend: function (request) {
         request.setRequestHeader("authorization", "Bearer " + accessToken);
@@ -25,7 +26,6 @@ if (window.location.href.indexOf("browse-job.html") >= 0) {
       },
       success: async function (req, res, data) {
         var job_obj = await JSON.parse(data.responseText);
-        console.log(job_obj);
         var user = JSON.parse(sessionStorage.getItem("user"));
         $("#profiless").html(user.name)
         var html_obj = $("#manual");
